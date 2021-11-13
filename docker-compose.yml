@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: react-docker
+    ports:
+      - "9333:9333"
+
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: node-build
+    ports:
+      - "80:80"
