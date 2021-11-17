@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import calculator from '../modules/calculator/reducers';
 
-export const store = configureStore({
+const store = configureStore({
     reducer: {
         calculator
     }
 });
+
+export default store;

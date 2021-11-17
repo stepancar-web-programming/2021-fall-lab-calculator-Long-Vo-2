@@ -40,7 +40,6 @@ app.post('/api/calculate', (request, response) => {
     expression = expression.replace(/e/g, 'e*1');
     expression = expression.replace(/E/g, 'E0');
 
-    console.log(expression);
     response.json({ answer: math.evaluate(expression) });
 });
 

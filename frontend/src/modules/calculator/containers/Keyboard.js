@@ -220,16 +220,6 @@ export default function Keyboard() {
                         </FunctionKey>
                     </CustomCell>
                     <CustomCell>
-                        {/* {isInv ? ( */}
-                        {/*    <FunctionKey */}
-                        {/*        onClick={() => { */}
-                        {/*            setExpression([...currentExpression].splice(-1)); */}
-                        {/*            addExpression(`<sup>${lastNumber(currentExpression.join(''))}</sup>√`); */}
-                        {/*        }} */}
-                        {/*    > */}
-                        {/*        <CustomSup>y</CustomSup>√x */}
-                        {/*    </FunctionKey> */}
-                        {/* ) : ( */}
                         <FunctionKey
                             onClick={() => {
                                 if (isPreviousNumber(currentExpression.join(''))) addExpression('<sup>');
@@ -238,7 +228,6 @@ export default function Keyboard() {
                         >
                             x<CustomSup>y</CustomSup>
                         </FunctionKey>
-                        {/* )} */}
                     </CustomCell>
                     <CustomCell>
                         <NumberKey onClick={() => addExpression('0')}>0</NumberKey>

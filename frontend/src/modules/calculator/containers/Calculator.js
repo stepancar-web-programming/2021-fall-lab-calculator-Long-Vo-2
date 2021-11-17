@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
@@ -31,7 +31,6 @@ export default function Calculator() {
         if (!loading && result) dispatch(updateResult([result]));
     }, [loading, result, dispatch]);
 
-    console.log(error);
     return (
         <>
             <CustomParticles />

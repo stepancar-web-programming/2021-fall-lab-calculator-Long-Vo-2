@@ -1,4 +1,5 @@
 import React from 'react';
+import DOMPurify from 'dompurify';
 
 import { styled, Container, Box, Typography } from '@mui/material';
 
@@ -41,14 +42,24 @@ export default function Screen() {
                 <ResultTypography
                     component="p"
                     dangerouslySetInnerHTML={{
-                        __html: !isChanged ? `${fillBracket(previousExpression.join(''))}=` : `Ans=${result}`
+                        __html: DOMPurify.sanitize(
+                            !isChanged ? `${fillBracket(previousExpression.join(''))}=` : `Ans=${result}`
+                        )
                     }}
                 />
                 <ExpressionTypography
                     component="p"
-                    dangerouslySetInnerHTML={{ __html: fillBracket(currentExpression.join('')) }}
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(fillBracket(currentExpression.join(''))) }}
                 />
             </ScreenContainer>
+            <div
+                id="result"
+                style={{
+                    display: 'none'
+                }}
+            >
+                {result}
+            </div>
         </Box>
     );
 }

@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
-import { store } from './store/reducers';
+import { store } from './store';
 
 ReactDOM.render(
     <HelmetProvider>
