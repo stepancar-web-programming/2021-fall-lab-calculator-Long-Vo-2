@@ -1,0 +1,35 @@
+{
+    "name": "itmooc",
+    "author": "thienlongtpct",
+    "private": true,
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.bundle.js",
+        "build": "webpack",
+        "dev": "nodemon ./server.js",
+        "lint": "eslint --ext .js,.jsx ./",
+        "lint:fix": "eslint --fix --ext .js,.jsx ./"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "http-proxy-middleware": "^1.0.4",
+        "mathjs": "^9.5.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.15.5",
+        "@babel/eslint-parser": "^7.15.7",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-flowtype": "^6.0.1",
+        "eslint-plugin-import": "^2.24.2",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-prettier": "^4.0.0",
+        "nodemon": "^2.0.4",
+        "prettier": "^2.4.1",
+        "webpack": "^4.43.0",
+        "webpack-cli": "^3.3.11",
+        "webpack-stream": "^5.2.1"
+    }
+}
