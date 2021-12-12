@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Table, TableBody, TableRow, TableCell, styled } from '@mui/material';
+import { Table, TableBody, TableRow, TableCell, Button, styled } from '@mui/material';
 
-import { ClearKey, EqualKey, FunctionKey, InvKey, NumberKey, OperationKey, RagDegKey } from '../components';
 import { countAppear, fillBracket, fillTag, isPreviousNumber, lastNumber } from '../../core/utils/parseUtils';
 import { randomGenerate } from '../../core/utils/formatNumber';
 import { calculate } from '../reducers/expressionReducer';
 import { setCurrentExpression, setError } from '../reducers/screenReducer';
+import { FunctionButton, RagDegKey } from '../components';
 
 const CustomCell = styled(TableCell)(({ theme }) => ({
     padding: theme.spacing(1),
@@ -59,13 +59,19 @@ export default function Keyboard() {
                         <RagDegKey onClick={switchIsDeg} isDeg={isDeg} />
                     </CustomCell>
                     <CustomCell>
-                        <FunctionKey onClick={() => addExpression('!')}>x!</FunctionKey>
+                        <FunctionButton variant="contained" fullWidth onClick={() => addExpression('!')}>
+                            x!
+                        </FunctionButton>
                     </CustomCell>
                     <CustomCell>
-                        <FunctionKey onClick={() => addExpression('(')}>(</FunctionKey>
+                        <FunctionButton variant="contained" fullWidth onClick={() => addExpression('(')}>
+                            (
+                        </FunctionButton>
                     </CustomCell>
                     <CustomCell>
-                        <FunctionKey
+                        <FunctionButton
+                            variant="contained"
+                            fullWidth
                             onClick={() => {
                                 if (
                                     countAppear(currentExpression.join(''), '(') >
@@ -81,172 +87,262 @@ export default function Keyboard() {
                             }}
                         >
                             )
-                        </FunctionKey>
+                        </FunctionButton>
                     </CustomCell>
                     <CustomCell>
-                        <FunctionKey onClick={() => addExpression('%')}>%</FunctionKey>
+                        <FunctionButton variant="contained" fullWidth onClick={() => addExpression('%')}>
+                            %
+                        </FunctionButton>
                     </CustomCell>
                     <CustomCell>
                         {currentExpression.length > 1 ? (
-                            <ClearKey onClick={clearEntryExpression} isCE />
+                            <Button variant="contained" fullWidth color="warning" onClick={clearEntryExpression}>
+                                CE
+                            </Button>
                         ) : (
-                            <ClearKey onClick={allClearExpression} />
+                            <Button variant="contained" fullWidth color="error" onClick={allClearExpression}>
+                                AC
+                            </Button>
                         )}
                     </CustomCell>
                 </TableRow>
                 <TableRow>
                     <CustomCell>
-                        <InvKey onClick={switchIsInv} isInv={isInv}>
+                        <FunctionButton
+                            variant="contained"
+                            fullWidth
+                            sx={{ bgcolor: (theme) => theme.palette.primary[isInv ? 'dark' : 'light'] }}
+                            onClick={switchIsInv}
+                        >
                             Inv
-                        </InvKey>
+                        </FunctionButton>
                     </CustomCell>
                     <CustomCell>
                         {isInv ? (
-                            <FunctionKey onClick={() => addExpression('sin<sup>-1</sup>(')}>
+                            <FunctionButton
+                                variant="contained"
+                                fullWidth
+                                onClick={() => addExpression('sin<sup>-1</sup>(')}
+                            >
                                 sin<CustomSup>-1</CustomSup>
-                            </FunctionKey>
+                            </FunctionButton>
                         ) : (
-                            <FunctionKey onClick={() => addExpression('sin(')}>sin</FunctionKey>
+                            <FunctionButton variant="contained" fullWidth onClick={() => addExpression('sin(')}>
+                                sin
+                            </FunctionButton>
                         )}
                     </CustomCell>
                     <CustomCell>
                         {isInv ? (
-                            <FunctionKey onClick={() => addExpression('e<sup>')}>
+                            <FunctionButton variant="contained" fullWidth onClick={() => addExpression('e<sup>')}>
                                 e<CustomSup>x</CustomSup>
-                            </FunctionKey>
+                            </FunctionButton>
                         ) : (
-                            <FunctionKey onClick={() => addExpression('ln(')}>ln</FunctionKey>
+                            <FunctionButton variant="contained" fullWidth onClick={() => addExpression('ln(')}>
+                                ln
+                            </FunctionButton>
                         )}
                     </CustomCell>
                     <CustomCell>
-                        <NumberKey onClick={() => addExpression('7')}>7</NumberKey>
+                        <Button variant="outlined" fullWidth onClick={() => addExpression('7')}>
+                            7
+                        </Button>
                     </CustomCell>
                     <CustomCell>
-                        <NumberKey onClick={() => addExpression('8')}>8</NumberKey>
+                        <Button variant="outlined" fullWidth onClick={() => addExpression('8')}>
+                            8
+                        </Button>
                     </CustomCell>
                     <CustomCell>
-                        <NumberKey onClick={() => addExpression('9')}>9</NumberKey>
+                        <Button variant="outlined" fullWidth onClick={() => addExpression('9')}>
+                            9
+                        </Button>
                     </CustomCell>
                     <CustomCell>
-                        <OperationKey onClick={() => addExpression('÷')}>÷</OperationKey>
+                        <Button variant="contained" fullWidth onClick={() => addExpression('÷')}>
+                            ÷
+                        </Button>
                     </CustomCell>
                 </TableRow>
                 <TableRow>
                     <CustomCell>
-                        <FunctionKey onClick={() => addExpression('π ')}>π</FunctionKey>
+                        <FunctionButton variant="contained" fullWidth onClick={() => addExpression('π ')}>
+                            π
+                        </FunctionButton>
                     </CustomCell>
                     <CustomCell>
                         {isInv ? (
-                            <FunctionKey onClick={() => addExpression('cos<sup>-1</sup>(')}>
+                            <FunctionButton
+                                variant="contained"
+                                fullWidth
+                                onClick={() => addExpression('cos<sup>-1</sup>(')}
+                            >
                                 cos<CustomSup>-1</CustomSup>
-                            </FunctionKey>
+                            </FunctionButton>
                         ) : (
-                            <FunctionKey onClick={() => addExpression('cos(')}>cos</FunctionKey>
+                            <FunctionButton variant="contained" fullWidth onClick={() => addExpression('cos(')}>
+                                cos
+                            </FunctionButton>
                         )}
                     </CustomCell>
                     <CustomCell>
                         {isInv ? (
-                            <FunctionKey onClick={() => addExpression('10<sup>x</sup>')}>
+                            <FunctionButton
+                                variant="contained"
+                                fullWidth
+                                onClick={() => addExpression('10<sup>x</sup>')}
+                            >
                                 10<CustomSup>x</CustomSup>
-                            </FunctionKey>
+                            </FunctionButton>
                         ) : (
-                            <FunctionKey onClick={() => addExpression('log(')}>log</FunctionKey>
+                            <FunctionButton variant="contained" fullWidth onClick={() => addExpression('log(')}>
+                                log
+                            </FunctionButton>
                         )}
                     </CustomCell>
                     <CustomCell>
-                        <NumberKey onClick={() => addExpression('4')}>4</NumberKey>
+                        {' '}
+                        <Button variant="outlined" fullWidth onClick={() => addExpression('4')}>
+                            4
+                        </Button>
                     </CustomCell>
                     <CustomCell>
-                        <NumberKey onClick={() => addExpression('5')}>5</NumberKey>
+                        {' '}
+                        <Button variant="outlined" fullWidth onClick={() => addExpression('5')}>
+                            5
+                        </Button>
                     </CustomCell>
                     <CustomCell>
-                        <NumberKey onClick={() => addExpression('6')}>6</NumberKey>
+                        {' '}
+                        <Button variant="outlined" fullWidth onClick={() => addExpression('6')}>
+                            6
+                        </Button>
                     </CustomCell>
                     <CustomCell>
-                        <OperationKey onClick={() => addExpression('×')}>×</OperationKey>
+                        <Button variant="contained" fullWidth onClick={() => addExpression('×')}>
+                            ×
+                        </Button>
                     </CustomCell>
                 </TableRow>
                 <TableRow>
                     <CustomCell>
-                        <FunctionKey onClick={() => addExpression('e ')}>e</FunctionKey>
+                        <FunctionButton variant="contained" fullWidth onClick={() => addExpression('e ')}>
+                            e
+                        </FunctionButton>
                     </CustomCell>
                     <CustomCell>
                         {isInv ? (
-                            <FunctionKey onClick={() => addExpression('tan<sup>-1</sup>(')}>
+                            <FunctionButton
+                                variant="contained"
+                                fullWidth
+                                onClick={() => addExpression('tan<sup>-1</sup>(')}
+                            >
                                 tan<CustomSup>-1</CustomSup>
-                            </FunctionKey>
+                            </FunctionButton>
                         ) : (
-                            <FunctionKey onClick={() => addExpression('tan(')}>tan</FunctionKey>
+                            <FunctionButton variant="contained" fullWidth onClick={() => addExpression('tan(')}>
+                                tan
+                            </FunctionButton>
                         )}
                     </CustomCell>
                     <CustomCell>
                         {isInv ? (
-                            <FunctionKey onClick={() => addExpression('<sup>2</sup>')}>
+                            <FunctionButton variant="contained" fullWidth onClick={() => addExpression('<sup>2</sup>')}>
                                 x<CustomSup>2</CustomSup>
-                            </FunctionKey>
+                            </FunctionButton>
                         ) : (
-                            <FunctionKey onClick={() => addExpression('√(')}>√</FunctionKey>
+                            <FunctionButton variant="contained" fullWidth onClick={() => addExpression('√(')}>
+                                √
+                            </FunctionButton>
                         )}
                     </CustomCell>
                     <CustomCell>
-                        <NumberKey onClick={() => addExpression('1')}>1</NumberKey>
+                        <Button variant="outlined" fullWidth onClick={() => addExpression('1')}>
+                            1
+                        </Button>
                     </CustomCell>
                     <CustomCell>
-                        <NumberKey onClick={() => addExpression('2')}>2</NumberKey>
+                        <Button variant="outlined" fullWidth onClick={() => addExpression('2')}>
+                            2
+                        </Button>
                     </CustomCell>
                     <CustomCell>
-                        <NumberKey onClick={() => addExpression('3')}>3</NumberKey>
+                        <Button variant="outlined" fullWidth onClick={() => addExpression('3')}>
+                            3
+                        </Button>
                     </CustomCell>
                     <CustomCell>
-                        <OperationKey onClick={() => addExpression('-')}>-</OperationKey>
+                        <Button variant="contained" fullWidth onClick={() => addExpression('-')}>
+                            -
+                        </Button>
                     </CustomCell>
                 </TableRow>
                 <TableRow>
                     <CustomCell>
                         {isInv ? (
-                            <FunctionKey onClick={() => addExpression(randomGenerate())}>Rnd</FunctionKey>
+                            <FunctionButton
+                                variant="contained"
+                                fullWidth
+                                onClick={() => addExpression(randomGenerate())}
+                            >
+                                Rnd
+                            </FunctionButton>
                         ) : (
-                            <FunctionKey onClick={() => addExpression('Ans')}>Ans</FunctionKey>
+                            <FunctionButton variant="contained" fullWidth onClick={() => addExpression('Ans')}>
+                                Ans
+                            </FunctionButton>
                         )}
                     </CustomCell>
                     <CustomCell>
-                        <FunctionKey
+                        <FunctionButton
+                            variant="contained"
+                            fullWidth
                             onClick={() => {
                                 if (isPreviousNumber(currentExpression.join(''))) addExpression('E');
                                 else dispatch(setError('E должно стоять после числа'));
                             }}
                         >
                             EXP
-                        </FunctionKey>
+                        </FunctionButton>
                     </CustomCell>
                     <CustomCell>
-                        <FunctionKey
+                        <FunctionButton
+                            variant="contained"
+                            fullWidth
                             onClick={() => {
                                 if (isPreviousNumber(currentExpression.join(''))) addExpression('<sup>');
                                 else dispatch(setError('Функция степени должна стоять после числа'));
                             }}
                         >
                             x<CustomSup>y</CustomSup>
-                        </FunctionKey>
+                        </FunctionButton>
                     </CustomCell>
                     <CustomCell>
-                        <NumberKey onClick={() => addExpression('0')}>0</NumberKey>
+                        <Button variant="outlined" fullWidth onClick={() => addExpression('0')}>
+                            0
+                        </Button>
                     </CustomCell>
                     <CustomCell>
-                        <NumberKey
+                        <Button
+                            variant="outlined"
+                            fullWidth
                             onClick={() => {
                                 if (lastNumber(currentExpression.join('')).indexOf('.') === -1) addExpression('.');
                                 else dispatch(setError('В числе может быть только 1 точка'));
                             }}
                         >
                             .
-                        </NumberKey>
+                        </Button>
                     </CustomCell>
                     <CustomCell>
-                        <EqualKey onClick={handleSubmit} />
+                        <Button variant="contained" fullWidth color="success" onClick={handleSubmit}>
+                            =
+                        </Button>
                     </CustomCell>
                     <CustomCell>
-                        <OperationKey onClick={() => addExpression('+')}>+</OperationKey>
+                        <Button variant="contained" fullWidth onClick={() => addExpression('+')}>
+                            +
+                        </Button>
                     </CustomCell>
                 </TableRow>
             </TableBody>

@@ -8,7 +8,7 @@ export default function Logo({ type = 'logo', sx }) {
         <Box
             component="img"
             src={`/static/logos/${type}.png`}
-            sx={{ height: 80, ...(type === 'logo' && { width: 80 }), ...sx }}
+            sx={{ height: 80, position: 'absolute', top: 20, left: 20, ...(type === 'logo' && { width: 80 }), ...sx }}
         />
     );
 }

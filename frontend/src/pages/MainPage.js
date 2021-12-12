@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { useTheme } from '@emotion/react';
+import { useTheme } from '@mui/material/styles';
 
 import Page from '../modules/core/components/Page';
 import { Calculator } from '../modules/calculator';
+import Logo from '../modules/core/components/Logo';
 
-export default function Main() {
+export default function MainPage() {
     const theme = useTheme();
 
     useEffect(() => {
@@ -12,8 +13,11 @@ export default function Main() {
     });
 
     return (
-        <Page title="Калькулятор - thienlongtpct">
-            <Calculator />
-        </Page>
+        <>
+            <Logo type="text-logo-white" />
+            <Page title="Калькулятор - thienlongtpct">
+                <Calculator />
+            </Page>
+        </>
     );
 }

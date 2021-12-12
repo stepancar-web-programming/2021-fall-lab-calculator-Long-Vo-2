@@ -7,7 +7,6 @@ import { Container, Box, Paper, Alert } from '@mui/material';
 
 import { clearError, updateResult } from '../reducers/screenReducer';
 import { CustomParticles } from '../../core/components';
-import { MotionContainer, varBounceIn } from '../../core/animate';
 import { Screen, Keyboard } from '.';
 
 const MainContainer = styled(Container)(() => ({
@@ -37,14 +36,15 @@ export default function Calculator() {
             <MainContainer maxWidth="md">
                 <Box>
                     <JoinPaper>
-                        {error && (
-                            <MotionContainer initial="initial" open onClick={() => dispatch(clearError())}>
-                                <motion.div variants={varBounceIn}>
-                                    <Alert severity="error" color="error" sx={{ mb: 2 }}>
-                                        {errorMessage}
-                                    </Alert>
-                                </motion.div>
-                            </MotionContainer>
+                        {error && errorMessage && (
+                            <Alert
+                                severity="error"
+                                color="error"
+                                sx={{ mb: 2, m: 1 }}
+                                onClose={() => dispatch(clearError())}
+                            >
+                                {errorMessage}
+                            </Alert>
                         )}
                         <Screen />
                         <Keyboard />
